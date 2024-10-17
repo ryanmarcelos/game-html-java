@@ -204,3 +204,53 @@ function desenhar() {
     criaObjeto();
   }
 }
+// Função para verificar colisão
+function verificaColisao(jogador, objeto) {
+  return jogador.x < objeto.x + objeto.largura &&
+         jogador.x + jogador.largura > objeto.x &&
+         jogador.y < objeto.y + objeto.altura &&
+         jogador.y + jogador.altura > objeto.y;
+}
+for (let i = 0; i < objetos.length; i++) {
+  const objeto = objetos[i];
+  if (verificaColisao({ x: jogadorX, y: canvas.height - jogadorAltura, largura: jogadorLargura, altura: jogadorAltura }, objeto)) {
+    pontuacao++;
+    reiniciaObjeto(objeto);
+  }
+}
+// Função para reiniciar o objeto
+function reiniciaObjeto(objeto) {
+  objeto.x = Math.random() * (canvas.width - objeto.largura);
+  objeto.y = 0;
+  objeto.velocidade += 0.5;
+}
+
+// Função para verificar se o jogo acabou
+function verificaFimDeJogo() {
+  return objetos.every(objeto => objeto.y > canvas.height);
+}
+// Array de níveis
+let niveis = [
+  { velocidade: 2, quantidadeObjetos: 5 },
+  { velocidade: 3, quantidadeObjetos: 8 },
+  // ... mais níveis
+];
+
+let nivelAtual = 0;
+
+// Função para iniciar um novo nível
+function iniciarNivel() {
+  // ... configurar o nível
+}
+let telaInicial = true;
+let telaFimDeJogo = false;
+
+// ... (código para desenhar as telas)
+
+// Função para iniciar o jogo
+function iniciarJogo() {
+  telaInicial = false;
+  telaFimDeJogo = false;
+  // ... inicializar o jogo
+}
+
