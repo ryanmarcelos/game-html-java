@@ -14,11 +14,11 @@
     </head>
     <body>
         <canvas id="gameCanvas" width="500" height="500"></canvas>
-    
+   
         <script>
             const canvas = document.getElementById("gameCanvas");
             const ctx = canvas.getContext("2d");
-    
+   
             let jogadorX = canvas.width / 2 - 25;
             const jogadorLargura = 50;
             const jogadorAltura = 20;
@@ -33,20 +33,20 @@
             let setaDireita = false;
             function desenhaJogador() {
                 ctx.fillStyle = "green";
-                ctx.fillRect(jogadorX, canvas.height - jogadorAltura, jogadorLargura, jogadorAltura); 
+                ctx.fillRect(jogadorX, canvas.height - jogadorAltura, jogadorLargura, jogadorAltura);
             }
-    
+   
             function desenhaObjeto() {
                 ctx.fillStyle = "red";
                 ctx.fillRect(objetoX, objetoY, objetoLargura, objetoAltura);
             }
-    
+   
             function desenhaPontuacao() {
                 ctx.fillStyle = "black";
                 ctx.font = "20px Arial";
                 ctx.fillText("Pontuação: " + pontuacao, 10, 20);
             }
-    
+   
             function atualizar() {
                 if (setaDireita && jogadorX < canvas.width - jogadorLargura) {
                     jogadorX += 7;
@@ -54,9 +54,9 @@
                 if (setaEsquerda && jogadorX > 0) {
                     jogadorX -= 7;
                 }
-    
+   
                 objetoY += velocidadeObjeto;
-    
+   
                 if (objetoY > canvas.height) {
                     jogoativo= false;
                     alert ("Fim de jogo! Sua pontuação foi: " + pontuacao);
@@ -68,27 +68,27 @@
                     objetoX < jogadorX + jogadorAltura
                 ) {
                     pontuacao++;
-    
+   
                     objetoX = Math.random() * (canvas.width - objetoLargura);
                     objetoY = 0;
                     velocidadeObjeto += 0.5;
                 }
             }
-    
+   
             function desenhar () {
                 if (jogoAtivo) {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+   
                     desenhaJogador();
                     desenhaObjeto();
                     desenhaPontuacao();
-    
+   
                     atualizar();
-    
+   
                     requestAnimationFrame(desenhar);
                 }
             }
-    
+   
             document.addEventListener("keydown", function (event) {
                 if (event.key === "ArrowRight") {
                     setaDireita = true;
@@ -97,7 +97,7 @@
                     setaEsquerda = true;
                 }
             });
-    
+   
             document.addEventListener("keyup", function (evento) {
                 if (event.key === "ArrowRight") {
                     setaDireita = false;
@@ -106,9 +106,8 @@
                     setaEsquerda = false;
                 }
             });
-    
+   
             desenhar();
         </script>
     </body>
     </html>
-    
